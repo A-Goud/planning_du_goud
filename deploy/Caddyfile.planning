@@ -1,0 +1,19 @@
+# À ajouter à /etc/caddy/Caddyfile (le certificat HTTPS est obtenu automatiquement).
+# Prérequis : l'enregistrement DNS « planning » doit déjà pointer vers ce serveur.
+planning.potodugoud.fr {
+	root * /var/www/planning
+	encode zstd gzip
+	file_server
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		# connect-src : compagnon local ; 'wasm-unsafe-eval' : moteur de calcul WebAssembly
+		Content-Security-Policy "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; worker-src 'self'; connect-src 'self' http://127.0.0.1:47822; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+	}
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+	@index path / /index.html
+	header @index Cache-Control "no-cache"
+}

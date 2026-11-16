@@ -1,0 +1,9 @@
+{
+  "name": "planning-du-goud",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build:site": "npm run build -w @planning/companion && npm run build:exe -w @planning/companion && npm run build -w @planning/app",
+    "test": "npm test --workspaces --if-present"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@planning/companion",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:exe": "node scripts/build-exe.mjs",
+    "start": "node dist/companion.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@planning/solver": "*",
+    "highs": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "postject": "^1.0.0-alpha.6",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
